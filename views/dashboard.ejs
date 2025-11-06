@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Fitness Tracker Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    form {
+      margin: 20px 0;
+    }
+    input {
+      padding: 8px;
+      margin-right: 10px;
+    }
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    .delete-btn {
+      background-color: #f44336;
+    }
+    .delete-btn:hover {
+      background-color: #da190b;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #f9f9f9;
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .workout-info {
+      flex: 1;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome <%= name %>!</h1>
+
+  <h2>Add Workout</h2>
+  <form action="/workouts/add" method="POST">
+    <input type="text" name="exercise" placeholder="Exercise" required />
+    <input type="number" name="duration" placeholder="Duration (min)" required />
+    <button type="submit">Add Workout</button>
+  </form>
+
+  <hr />
+
+  <h2>Your Workouts</h2>
+  <ul>
+    <% workouts.forEach(workout => { %>
+      <li>
+        <div class="workout-info">
+          <strong><%= workout.exercise %></strong> - <%= workout.duration %> mins
+          <small>(Added: <%= workout.date.toLocaleDateString() %>)</small>
+        </div>
+        <div class="actions">
+          <form action="/workouts/edit/<%= workout._id %>" method="POST">
+            <input type="text" name="exercise" placeholder="Edit exercise" />
+            <input type="number" name="duration" placeholder="Edit duration" />
+            <button type="submit">Update</button>
+          </form>
+          <form action="/workouts/delete/<%= workout._id %>" method="POST">
+            <button type="submit" class="delete-btn">Delete</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</body>
+</html>
