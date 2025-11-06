@@ -47,10 +47,7 @@ Clone the repository:
   Install dependencies:
   npm install
 
-  Create a .env file:
-  MONGODB_URI=mongodb+srv://meshaclucky6_db_user:8igTmQUKzIK1Xow8@seb.m2j6jtv.mongodb.net/MEN-stack-CRUD-app-PROJECT?appName=SEB
-PORT=3000
-SESSION_SECRET=
+
 
 Start the server:
 npm Nodemon
